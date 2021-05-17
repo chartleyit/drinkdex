@@ -9,5 +9,8 @@ build-example:
 build:
 	CGO_ENABLED=0 go build ${LDFLAGS} -a -o bin/drink-dex
 
+build-docker:
+	docker build -f Dockerfile -t drinkdex .
+
 run:
 	go run main.go
