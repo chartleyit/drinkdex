@@ -1,12 +1,15 @@
 # All the things
 
-[ ] add todo list
+[X] add todo list
 
-[ ] make/build logic
-[ ] container build
+[X] make/build logic
 [ ] gofiber basic api
+[ ] container build
 [ ] logrus logger
 [ ] prometheus metricss
 [ ] jaeger apm
 [ ] investigate database storage options
 [ ] k8s local testing
+[ ] add listener name pradigm (api.domain.com, docs.domain.com [swagger])
+[ ] investigate swagger
+[ ] investigate ginkgo
