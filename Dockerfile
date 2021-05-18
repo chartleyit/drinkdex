@@ -1,12 +1,7 @@
-FROM golang:alpine AS build
+# Build image
+FROM golang:alpine AS builder
 
-RUN apk update && \
-    apk add curl \
-            git \
-            bash \
-            make \
-            ca-certificates && \
-    rm -rf /var/cache/apk/*
+RUN apk add --update --no-cache ca-certificates curl git bash make
 
 WORKDIR /app
 
@@ -15,5 +10,14 @@ RUN go mod download
 RUN go mod verify
 
 COPY Makefile ./
-COPY main.go ./
+COPY . .
 RUN make build
+
+# Final image
+FROM alpine:3.11
+
+RUN apk add --update --no-cache ca-certificates bash curl
+
+COPY --from=builder /app/bin/drinkdex /usr/local/bin/
+EXPOSE 18150
+ENTRYPOINT ["/usr/local/bin/drinkdex"]
